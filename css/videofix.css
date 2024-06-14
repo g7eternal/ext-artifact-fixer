@@ -1,0 +1,4 @@
+body.artifact-drm video {
+  filter: invert(1);
+  transform: scale(-1);
+}

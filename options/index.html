@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <title>ArtifactDRM - Options</title>
+  </head>
+  <body data-bs-theme="dark">
+    <div class="container-lg flex flex-column p-4">
+      <h1><img src="/images/icon48.png" alt="icon" width="48" /> ArtifactDRM</h1>
+      <p>
+        This extension works automatically. You can specify which Twitch streams will be affected using controls below.
+        <br /><br />
+        You can always click on the extension icon to toggle the transformations on or off.
+      </p>
+      <div class="mt-4">
+        <h2>Options</h2>
+        <div class="mb-2">
+          <label for="channels" class="form-label">Automatically enable in channels:</label>
+          <input
+            data-bs-theme="light"
+            type="text"
+            class="form-control"
+            id="channels"
+            placeholder="channel1,channel2,..."
+          />
+          <small class="text-muted"><em>Comma-separated list of Twitch channels (case-insensitive)</em></small>
+        </div>
+        <div class="mb-2">
+          <label for="streamTags" class="form-label">Automatically enable when stream has tags:</label>
+          <input data-bs-theme="light" type="text" class="form-control" id="streamTags" placeholder="tag1,tag2,..." />
+          <small class="text-muted"><em>Comma-separated list of Twitch tags to look for (case-insensitive)</em></small>
+        </div>
+      </div>
+      <!--
+      <hr />
+      <div class="mt-4">
+        <h2>About</h2>
+        <p>
+          Created by
+          <a href="https://g7eternal.com/">G7Eternal</a>
+          | Source code available on
+          <a href="https://github.com/g7eternal/ext-artifact-drm">GitHub</a>
+        </p>
+        <p>
+          Have any questions? Want to report a bug?
+          <a href="https://github.com/g7eternal/ext-artifact-drm/issues">Create a ticket on GitHub</a>
+        </p>
+      </div>
+      -->
+    </div>
+    <script src="./index.js" type="text/javascript"></script>
+  </body>
+</html>
