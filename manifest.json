@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ArtifactDRM",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An extension which actually improves your viewing experience on Twitch.",
   "action": {
     "default_icon": {
@@ -11,11 +11,14 @@
     },
     "default_title": "ArtifactDRM: Toggle state"
   },
-  "options_page": "options/index.html",
-  "permissions": ["activeTab", "tabs", "declarativeContent", "scripting", "storage", "webNavigation"],
+  "options_ui": {
+    "page": "options/index.html"
+  },
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": ["*://twitch.tv/*", "*://*.twitch.tv/*"],
   "content_scripts": [
     {
-      "matches": ["*://*.twitch.tv/*"],
+      "matches": ["*://twitch.tv/*", "*://*.twitch.tv/*"],
       "css": ["css/videofix.css"],
       "js": ["src/content.js"],
       "run_at": "document_idle"
