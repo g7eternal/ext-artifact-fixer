@@ -1,4 +1,5 @@
 const CLASSNAME = "artifact-drm";
+const CSS_ID = "ARDM__CustomStylesheet";
 
 /**
  * Retrieves required data keys from storage. Each argument passed for this function is a key.
@@ -20,6 +21,29 @@ async function getListOfElements() {
       .map((s) => s.trim());
   }
   return result;
+}
+
+/**
+ * Injects custom user-defined transformation style for video content.
+ * @param {String} userCSS
+ */
+function applyCustomCSS(userCSS = "") {
+  if (!userCSS) {
+    console.warn("ADRM: Empty transformation style, skipping work.");
+    return;
+  }
+
+  const renderedStyle = document.getElementById(CSS_ID);
+  if (renderedStyle) return;
+
+  const style = document.createElement("style");
+  style.id = CSS_ID;
+
+  // replacing {}, because we want to disallow users to modify any other elements
+  style.textContent = `body.artifact-drm video {${String(userCSS).replace(/[{}]/g, "")}}`;
+
+  document.head.appendChild(style);
+  console.log("ADRM: User styles appended.");
 }
 
 /**
@@ -80,6 +104,11 @@ async function init() {
   let isDrmStream = false;
 
   try {
+    // css injection should happen once during page load:
+    const cssData = await chrome.storage.sync.get("css");
+    applyCustomCSS(cssData.css);
+
+    // and then we decide if css is applied or not (by toggling classname on <body>)
     const opts = await getListOfElements("channels", "tags");
 
     // condition: stream name is in the list

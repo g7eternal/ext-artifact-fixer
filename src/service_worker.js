@@ -1,4 +1,4 @@
-const DEFAULTS = { channels: "mitpod", tags: "ArtifactDRM" };
+const DEFAULTS = { channels: "mitpod", tags: "ArtifactDRM", css: "filter: invert(1);\ntransform: scale(-1);" };
 
 /**
  * Helper function, sets an icon for our extension.

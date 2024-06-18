@@ -32,15 +32,26 @@
           <input data-bs-theme="light" type="text" class="form-control" id="streamTags" placeholder="tag1,tag2,..." />
           <small class="text-muted"><em>Comma-separated list of Twitch tags to look for (case-insensitive)</em></small>
         </div>
+        <div class="mb-2">
+          <label for="streamTags" class="form-label">Content transformations:</label>
+          <textarea
+            data-bs-theme="light"
+            class="form-control"
+            id="videoCSS"
+            rows="3"
+            placeholder="CSS code goes here"
+          ></textarea>
+          <small class="text-muted"><em>ℹ️ Do not modify this unless you know what you are doing.</em></small>
+        </div>
       </div>
-      <!--
       <hr />
       <div class="mt-4">
         <h2>About</h2>
         <p>
           Created by
           <a href="https://g7eternal.com/">G7Eternal</a>
-          | Source code available on
+          <br />
+          Source code available on
           <a href="https://github.com/g7eternal/ext-artifact-drm">GitHub</a>
         </p>
         <p>
@@ -48,7 +59,6 @@
           <a href="https://github.com/g7eternal/ext-artifact-drm/issues">Create a ticket on GitHub</a>
         </p>
       </div>
-      -->
     </div>
     <script src="./index.js" type="text/javascript"></script>
   </body>
