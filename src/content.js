@@ -2,6 +2,17 @@ const CLASSNAME = "artifact-drm";
 const CSS_ID = "ARDM__CustomStylesheet";
 
 /**
+ * Primitive attempt to get streamer username from URL.
+ * It's probably good enough since we are only running these scripts on twitch.
+ * @returns {String} current streamer's username (in lowercase)
+ */
+function getStreamerName() {
+  // expect a link like twitch.tv/username or m.twitch.tv/username?params
+  const username = window.location.pathname.split("/").pop();
+  return (username || "").toLowerCase();
+}
+
+/**
  * Retrieves required data keys from storage. Each argument passed for this function is a key.
  * @returns {Promise<Object>} parsed data from extension storage
  */
@@ -101,6 +112,7 @@ function checkTags() {
  * A function which detects the initial state of DRM transformation (enabled or not).
  */
 async function init() {
+  const streamName = getStreamerName();
   let isDrmStream = false;
 
   try {
@@ -113,7 +125,6 @@ async function init() {
 
     // condition: stream name is in the list
     if (!isDrmStream) {
-      const streamName = window.location.pathname.split("/").pop().toLowerCase();
       if (opts.channels.includes(streamName)) {
         console.log("ADRM: Stream name is marked as experimental.");
         isDrmStream = true;
@@ -132,7 +143,12 @@ async function init() {
       }
     }
   } finally {
-    toggleTransform(isDrmStream);
+    if (streamName === getStreamerName()) {
+      toggleTransform(isDrmStream);
+    } else {
+      // fix for probable race condition: checkTags can take up to 10 seconds, and user may have moved away
+      console.debug(`ADRM: User already navigated away from [${streamName}]. Transformations were not applied.`);
+    }
   }
 }
 
