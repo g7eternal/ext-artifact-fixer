@@ -2,11 +2,12 @@ const DEFAULTS = { channels: "mitpod", tags: "ArtifactDRM", css: "filter: invert
 
 /**
  * Helper function, sets an icon for our extension.
+ * @param {number} tabId tab's id, usually - sender.tab.id
  * @param {String} newIcon icon name
  */
-function setIconForBrowser(newIcon = "icon") {
+function setIconForBrowser(tabId, newIcon = "icon") {
   const iconPath = `/images/${newIcon}128.png`;
-  chrome.action.setIcon({ path: iconPath });
+  chrome.action.setIcon({ path: iconPath, tabId: tabId });
 }
 
 //////////////////////////////////////////////////////////
@@ -38,12 +39,16 @@ chrome.action.onClicked.addListener((tab) => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request.action) {
     case "setIcon": {
-      setIconForBrowser(request.icon);
+      if (sender.tab) {
+        setIconForBrowser(sender.tab.id, request.icon);
+      } else {
+        console.warn("ADRM: Unexpected caller for setIcon: ", sender);
+      }
       break;
     }
     default: {
-      console.debug("Unknown action: ", request.action);
-      console.trace("Skipping request: ", request);
+      console.debug("ADRM: Unknown action: ", request.action);
+      console.trace("ADRM: Skipping request: ", request);
     }
   }
 });
