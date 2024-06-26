@@ -14,24 +14,58 @@
         <br /><br />
         You can always click on the extension icon to toggle the transformations on or off.
       </p>
+      <hr />
       <div class="mt-4">
         <h2>Options</h2>
         <div class="mb-2">
-          <label for="channels" class="form-label">Automatically enable in channels:</label>
+          <div>
+            <input type="checkbox" id="cbVerified" data-flag-name="verifiedList" />
+            <label for="cbVerified" class="form-label">Automatically enable in verified channels:</label>
+          </div>
+          <div class="alert alert-secondary" role="alert">
+            <div class="d-flex flex-row">
+              <div class="flex-grow-1">Channels in list: <strong id="verListCount">0</strong></div>
+              <button class="btn btn-primary py-0" id="doUpdateVerifiedList">Update now</button>
+            </div>
+            <input disabled type="text" class="form-control my-2" id="verifiedList" data-storage-key="verifiedList" />
+            <small class="text-muted">
+              <em>This list is maintained by extension owner and updated automatically.</em>
+            </small>
+          </div>
+        </div>
+        <div class="mb-2">
+          <div>
+            <input type="checkbox" id="cbChannels" data-flag-name="channels" />
+            <label for="cbChannels" class="form-label">Automatically enable in channels:</label>
+          </div>
           <input
             data-bs-theme="light"
             type="text"
             class="form-control"
             id="channels"
-            placeholder="channel1,channel2,..."
+            placeholder="channel1, channel2, ..."
+            data-storage-key="channels"
+            data-locked-by="cbChannels"
           />
           <small class="text-muted"><em>Comma-separated list of Twitch channels (case-insensitive)</em></small>
         </div>
         <div class="mb-2">
-          <label for="streamTags" class="form-label">Automatically enable when stream has tags:</label>
-          <input data-bs-theme="light" type="text" class="form-control" id="streamTags" placeholder="tag1,tag2,..." />
+          <div>
+            <input type="checkbox" id="cbStreamTags" data-flag-name="streamTags" />
+            <label for="cbStreamTags" class="form-label">Automatically enable when stream has tags:</label>
+          </div>
+          <input
+            data-bs-theme="light"
+            type="text"
+            class="form-control"
+            id="streamTags"
+            placeholder="tag1, tag2, ..."
+            data-storage-key="tags"
+            data-locked-by="cbStreamTags"
+          />
           <small class="text-muted"><em>Comma-separated list of Twitch tags to look for (case-insensitive)</em></small>
         </div>
+        <hr />
         <div class="mb-2">
           <label for="streamTags" class="form-label">Content transformations:</label>
           <textarea
@@ -40,6 +74,7 @@
             id="videoCSS"
             rows="3"
             placeholder="CSS code goes here"
+            data-storage-key="css"
           ></textarea>
           <small class="text-muted"><em>ℹ️ Do not modify this unless you know what you are doing.</em></small>
         </div>
@@ -49,14 +84,14 @@
         <h2>About</h2>
         <p>
           Created by
-          <a href="https://g7eternal.com/">G7Eternal</a>
+          <a href="https://g7eternal.com/" target="_blank">G7Eternal</a>
           <br />
           Source code available on
-          <a href="https://github.com/g7eternal/ext-artifact-fixer">GitHub</a>
+          <a href="https://github.com/g7eternal/ext-artifact-fixer" target="_blank">GitHub</a>
         </p>
         <p>
           Have any questions? Want to report a bug?
-          <a href="https://github.com/g7eternal/ext-artifact-fixer/issues">Create a ticket on GitHub</a>
+          <a href="https://github.com/g7eternal/ext-artifact-fixer/issues" target="_blank">Create a ticket on GitHub</a>
         </p>
       </div>
     </div>
