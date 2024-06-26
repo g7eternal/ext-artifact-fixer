@@ -13,12 +13,27 @@ function getStreamerName() {
 }
 
 /**
+ * Retrieves list of enabled toggleables (checkboxes).
+ * @returns {Promise<Array<String>>} list of flags
+ */
+async function getToggles() {
+  try {
+    const data = await chrome.storage.sync.get("__checkboxes");
+    return data ? JSON.parse(data.__checkboxes || "[]") : [];
+  } catch (e) {
+    console.warn("ADRM: __checkboxes parsing error", e);
+    return [];
+  }
+}
+
+/**
  * Retrieves required data keys from storage. Each argument passed for this function is a key.
+ * @param {...string} arguments keys in storage with comma-separated data lists
  * @returns {Promise<Object>} parsed data from extension storage
  */
 async function getListOfElements() {
   const keys = Array.from(arguments);
-  const data = await chrome.storage.sync.get(["channels", "tags"]);
+  const data = await chrome.storage.sync.get(keys);
 
   const result = {};
   for (const key of keys) {
@@ -121,18 +136,27 @@ async function init() {
     applyCustomCSS(cssData.css);
 
     // and then we decide if css is applied or not (by toggling classname on <body>)
-    const opts = await getListOfElements("channels", "tags");
+    const toggles = await getToggles();
+    const opts = await getListOfElements("channels", "tags", "verifiedList");
 
-    // condition: stream name is in the list
-    if (!isDrmStream) {
+    // condition: stream name is in the verified list
+    if (!isDrmStream && toggles.includes("verifiedList")) {
+      if (opts.verifiedList.includes(streamName)) {
+        console.log("ADRM: Stream name is present in the 'verified' list.");
+        isDrmStream = true;
+      }
+    }
+
+    // condition: stream name is in the custom list
+    if (!isDrmStream && toggles.includes("channels")) {
       if (opts.channels.includes(streamName)) {
-        console.log("ADRM: Stream name is marked as experimental.");
+        console.log("ADRM: Stream name exists in user-defined list.");
         isDrmStream = true;
       }
     }
 
     // condition: stream has certain tags
-    if (!isDrmStream) {
+    if (!isDrmStream && toggles.includes("streamTags")) {
       const tags = await checkTags(opts.tags);
       console.log("ADRM: Stream matching tags found:", tags);
 
