@@ -1,11 +1,20 @@
-#  ArtifactDRM browser extension (wip)
+#  ArtifactDRM browser extension
 
 ## Available for: 
 + Firefox and similar (Waterfox, Firefox Mobile, etc.): [Mozilla addon store](https://addons.mozilla.org/en-US/firefox/addon/artifactdrm/)
 + Chrome and Chromium-based browsers (Opera, Edge, Brave, etc.): [Chrome web store](https://chromewebstore.google.com/detail/artifactdrm/kjcidfilidmokfkkgocnbnpamnbdmbmd)
+
 ## Usage
-Check extension options to select pages where this extension will automatically work.
-Alternatively, open a page with video content, then click on an extension icon in the toolbar to enable transformations.
+### Manually - on any stream
+Click on an extension icon in browser's toolbar to apply fix for video content.
+If you are using a mobile browser, the button is available in "Extensions" dropdown menu.
+Click again to disable transformations.
+### Automatically - on selected streams
+Check out extension's "Options" in browser to improve your experience.
+There are several options available:
++ Curated list: this extension provides a curated list of streams where fix will be applied automatically; you can disable this feature if needed.
++ By channel name: you can specify channel names where extension will be enabled automatically.
++ By stream tags: type one or several tags, and when you open a stream with at least one of these tags present - extension will be enabled automatically.
 
 ## Feedback
-Have any questions? [Submit a ticket](https://github.com/g7eternal/ext-artifact-fixer/issues)
+Have any questions? Or a suggestion maybe? [Submit a ticket](https://github.com/g7eternal/ext-artifact-fixer/issues)
