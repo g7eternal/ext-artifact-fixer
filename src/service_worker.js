@@ -5,8 +5,7 @@ const DEFAULTS = {
   css: "filter: invert(1);\ntransform: scale(-1);",
 };
 
-const VERIFIED_LIST =
-  "https://gist.githubusercontent.com/g7eternal/b186c348fb7973276640bdfdbf48eb4c/raw/790818d91501f3ac2ed1bc225a02684409ce458a/gistfile1.txt";
+const VERIFIED_LIST = "https://gist.githubusercontent.com/g7eternal/b186c348fb7973276640bdfdbf48eb4c/raw/";
 
 /**
  * Helper function, sets an icon for our extension.
