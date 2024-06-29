@@ -16,5 +16,10 @@ There are several options available:
 + By channel name: you can specify channel names where extension will be enabled automatically.
 + By stream tags: type one or several tags, and when you open a stream with at least one of these tags present - extension will be enabled automatically.
 
+## For streamers
+Your channel can be added to the "verified" list if you wish to utilize this extension. This means the extension will work automatically for every user in your channel.
+
+Please email me at *artifact-drm[at]g7eternal.com*, and include your channel name in the message.
+
 ## Feedback
 Have any questions? Or a suggestion maybe? [Submit a ticket](https://github.com/g7eternal/ext-artifact-fixer/issues)
